@@ -10,3 +10,8 @@ This program uses the Python interface to `Xlib` to keep track of which program 
 							Specify log file location
 	  -p PROCESS, --process PROCESS
 							Specify custom process name
+
+
+Dependencies:
+
+	sudo apt-get install python3-psutil python3-xlib
