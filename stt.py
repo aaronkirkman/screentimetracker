@@ -36,7 +36,7 @@ def main(interval, log_file, process_name):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--interval", help="Specify update interval in seconds", default=60)
+    parser.add_argument("-n", "--interval", type=int, help="Specify update interval in seconds", default=60)
     parser.add_argument("-", "--logfile", type=str, help="Specify log file location",
                         default=os.path.expanduser("~/.screentime.log"))
     parser.add_argument("-p", "--process", type=str, help="Specify custom process name",
