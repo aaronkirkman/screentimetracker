@@ -17,7 +17,7 @@ def get_focused_window_process(display):
 
 
 def set_process_name(process_name):
-    # https://stackoverflow.com/a/923034/2766558
+    # https://stackoverflow.com/a/923034
     libc = ctypes.cdll.LoadLibrary('libc.so.6')
     buff = ctypes.create_string_buffer(len(process_name)+1)
     buff.value = process_name.encode("utf-8")
