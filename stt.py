@@ -11,9 +11,14 @@ import Xlib.display
 
 
 def get_focused_window_process(display):
-    win = display.get_input_focus().focus
-    prop = win.get_full_property(display.intern_atom('_NET_WM_PID'), Xlib.X.AnyPropertyType)
-    return psutil.Process(prop.value[0]).name() if prop is not None else ""
+    root = display.screen().root
+    win = root.get_full_property(display.intern_atom("_NET_ACTIVE_WINDOW"), Xlib.X.AnyPropertyType)
+    if win is not None:
+        win_id = win.value[0]
+        win_obj = display.create_resource_object('window', win_id)
+        prop = win_obj.get_full_property(display.intern_atom("_NET_WM_PID"), Xlib.X.AnyPropertyType)
+        return psutil.Process(prop.value[0]).name() if prop is not None else ""
+    return ""
 
 
 def set_process_name(process_name):
