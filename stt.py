@@ -2,6 +2,7 @@
 
 import argparse
 import ctypes
+import logging
 import os
 import psutil
 import time
@@ -27,11 +28,11 @@ def main(interval, log_file, process_name):
     set_process_name(process_name)
 
     display = Xlib.display.Display()
-    with open(log_file, "a") as log:
-        while True:
-            data = (time.time(), get_focused_window_process(display))
-            log.write(f"{data[0]},{data[1]}\n")
-            time.sleep(interval)
+
+    logging.basicConfig(filename=log_file, level=logging.INFO, format="%(created)f,%(message)s")
+    while True:
+        logging.info(get_focused_window_process(display))
+        time.sleep(interval)
 
 
 if __name__ == "__main__":
